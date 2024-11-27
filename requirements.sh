@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+is_linux=false
+tmux_doesnt_exist_or_is_empty=false
+
+
+
+if [[ "$(uname -s)" == "Linux" ]]; then
+    is_linux=true
+fi
+file="~/.tmux.conf"
+
+if [ -f "$file" ]; then
+    if [ ! -s "$file" ]; then
+        echo "tmux file is empty"
+        # file is empty
+        tmux_doesnt_exist_or_is_empty=true
+    fi
+else
+    echo "tmux file does not exist."
+    tmux_doesnt_exist_or_is_empty=true
+fi
+
+if ! command -v nvim 2>&1 >/dev/null; then
+    if ! $is_linux; then
+        echo "Installing for mac"
+        export HOMEBREW_NO_AUTO_UPDATE=1
+        brew install ripgrep
+        brew install fzf
+        brew install nvm
+        nvm install --lts
+        brew install --HEAD neovim
+        brew install typescript
+    else
+        echo "Installing for linux"
+        sudo apt install -y build-essential rg libtool autoconf automake cmake libncurses5-dev g++
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+        sudo apt install neovim
+    fi
+else
+    echo "nvim already installed."
+fi
+
+if ! command -v tmux 2>&1 >/dev/null; then
+    echo "Tmux not found. Installing"
+    if ! $is_linux; then
+        echo "installing tmux on mac"
+        brew install tmux
+    else
+        echo "installing tmux on linux"
+        sudo apt install tmux
+    fi
+else
+    echo "tmux already installed"
+    if $tmux_doesnt_exist_or_is_empty; then
+        # call wget to get upto date .tmux.conf
+        echo "getting .tmux.conf file"
+        wget https://raw.githubusercontent.com/reedship/tmux-conf/refs/heads/main/.tmux.conf -P ~/.tmux.conf
+    fi
+fi
+
