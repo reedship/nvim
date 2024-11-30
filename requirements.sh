@@ -23,6 +23,10 @@ fi
 if ! command -v nvim 2>&1 >/dev/null; then
     if ! $is_linux; then
         echo "Installing for mac"
+        # install homebrew if it's not present
+        if ! command -v brew 2>&1 >/dev/null; then
+            curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+        fi
         export HOMEBREW_NO_AUTO_UPDATE=1
         brew install ripgrep
         brew install fzf
@@ -58,3 +62,5 @@ else
     fi
 fi
 
+# what else do I need to get configured?
+# for mac I think all i need is nvm, node
