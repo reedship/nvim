@@ -58,7 +58,7 @@ else
     if $tmux_doesnt_exist_or_is_empty; then
         # call wget to get upto date .tmux.conf
         echo "getting .tmux.conf file"
-        wget https://raw.githubusercontent.com/reedship/tmux-conf/refs/heads/main/.tmux.conf -P ~/.tmux.conf
+        wget https://raw.githubusercontent.com/reedship/tmux-conf/refs/heads/main/.tmux.conf -P ~/
     fi
 fi
 
