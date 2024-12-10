@@ -27,15 +27,22 @@ if ! command -v nvim 2>&1 >/dev/null; then
         if ! command -v brew 2>&1 >/dev/null; then
             curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
         fi
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
         export HOMEBREW_NO_AUTO_UPDATE=1
         brew install ripgrep
         brew install fzf
-        brew install nvm
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+        source ~/.zshrc
         nvm install --lts
-        brew install --HEAD neovim
+        brew install neovim
         brew install typescript
+        brew install typescript-language-server
     else
         echo "Installing for linux"
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+             ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
         sudo apt install -y build-essential rg libtool autoconf automake cmake libncurses5-dev g++
         sudo add-apt-repository ppa:neovim-ppa/unstable
         sudo apt install neovim
