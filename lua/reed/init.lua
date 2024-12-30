@@ -1,3 +1,4 @@
-require("reed.plugins")
+require("reed.lazy")
 require("reed.remap")
 require("reed.set")
+-- require("reed.lsp")

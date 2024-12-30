@@ -1,0 +1,16 @@
+-- require("mason").setup()
+-- require("mason-lspconfig").setup({
+--   ensure_installed = { "ts_ls" }
+-- })
+-- require'lspconfig'.ts_ls.setup{
+--   cmd = {"typescript-language-server", "--stdio" },
+--   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+--   init_options = {
+--     hostInfo = "neovim"
+--   }
+-- }
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(ev)
+--     vim.cmd('ALEEnable')
+--   end
+-- })

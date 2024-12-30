@@ -32,9 +32,6 @@ return require('packer').startup(function(use)
       requires = { {'nvim-lua/plenary.nvim'} }
   }
   use ( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use({'neovim/nvim-lspconfig'})
-  use({'hrsh7th/nvim-cmp'})
-  use({'hrsh7th/cmp-nvim-lsp'})
   use {
       "jiaoshijie/undotree",
       config = function()
@@ -44,11 +41,9 @@ return require('packer').startup(function(use)
           "nvim-lua/plenary.nvim",
       },
   }
-  use {
-      "pmizio/typescript-tools.nvim",
-      requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-      config = function()
-          require("typescript-tools").setup {}
-      end,
-  }
+  use ({
+    "williamboman/mason.nvim", 
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig"
+  })
 end)
