@@ -13,7 +13,6 @@ return {
         }
       end)
       vim.keymap.set('n', '<leader>fs', require('telescope.builtin').live_grep)
-
       vim.keymap.set('n', '<leader>b', function() require('telescope.builtin').buffers({ sort_mru=true, ignore_current_buffer=true })end ,{})
       vim.keymap.set('n', '<leader>o', require('telescope.builtin').oldfiles, {})
     end
