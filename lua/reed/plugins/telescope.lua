@@ -12,6 +12,12 @@ return {
           },
           git_files = {
             theme = "ivy"
+          },
+          buffers = {
+            theme = "ivy"
+          },
+          grep_string = {
+            theme = "ivy"
           }
         },
         extensions = {
@@ -34,14 +40,14 @@ return {
         }
       end)
       require "reed.plugins.telescope.multigrep".setup()
-      -- vim.keymap.set('n', '<leader>b', function() require('telescope.builtin').buffers(ivy)end, {})
-      vim.keymap.set('n', '<leader>o', require('telescope.builtin').oldfiles, {})
+      vim.keymap.set('n', '<leader>b', function() require('telescope.builtin').buffers(ivy) end)
+      vim.keymap.set('n', '<leader>o', function() require('telescope.builtin').oldfiles(ivy) end)
       local action_state = require('telescope.actions.state')
 
       vim.keymap.set('n', '<leader>b', function()
         require('telescope.builtin').buffers({
           initial_mode = "normal",
-          theme = "ivy",
+          theme = ivy,
           attach_mappings = function(prompt_bufnr, map)
             local delete_buf = function()
               local current_picker = action_state.get_current_picker(prompt_bufnr)

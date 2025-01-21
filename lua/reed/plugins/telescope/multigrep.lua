@@ -41,13 +41,15 @@ local live_multigrep = function(opts)
     debounce = 100,
     prompt_title = "Multi Grep",
     finder = finder,
+    theme = "ivy",
     previewer = conf.grep_previewer(opts),
     sorter = require("telescope.sorters").empty(),
   }):find()
 end
 
+local ivy = require('telescope.themes').get_ivy()
 M.setup = function()
-  vim.keymap.set("n", "<leader>fs", live_multigrep)
+  vim.keymap.set("n", "<leader>fs", function() live_multigrep(ivy) end)
 end
 
 return M
