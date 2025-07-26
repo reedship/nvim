@@ -9,6 +9,8 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+vim.opt.equalalways = true
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
@@ -32,3 +34,4 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.cmd.colorscheme = "gruber-darker"
+vim.api.nvim_create_user_command('Yankpath', '!echo % | pbcopy', {})
