@@ -35,6 +35,7 @@ alt-h = 'join-with left'
 alt-v = 'join-with up'
 alt-q = 'close' 
 alt-shift-q = 'close-all-windows-but-current' 
+alt-shift-r = 'balance-sizes'
 alt-f = 'fullscreen'
 
 alt-s = 'layout v_accordion' # 'layout stacking' in i3
