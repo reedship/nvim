@@ -12,7 +12,7 @@ return {
         end
     },
     {
-      { 'echasnovski/mini.surround', 
+      { 'echasnovski/mini.surround',
       config = function()
         local surround = require 'mini.surround'
         surround.setup {}
@@ -20,11 +20,19 @@ return {
     }
     },
     {
-      { 'echasnovski/mini.pairs', 
+      { 'echasnovski/mini.pairs',
       config = function()
         local pairs = require 'mini.pairs'
         pairs.setup {}
       end
     }
+    },
+    {
+      { 'echasnovski/mini.icons',
+      config = function()
+        local icons = require 'mini.icons'
+        icons.setup {}
+      end
     }
+    },
 }

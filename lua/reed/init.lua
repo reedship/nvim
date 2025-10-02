@@ -1,4 +1,4 @@
 require("reed.lazy")
 require("reed.remap")
 require("reed.set")
--- require("reed.lsp")
+require("reed.term")

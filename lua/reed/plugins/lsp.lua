@@ -1,83 +1,57 @@
 return {
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-          library = {
-            -- See the configuration section for more details
-            -- Load luvit types when the `vim.uv` word is found
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          },
-        },
-      },
-    },
+    "neovim/nvim-lspconfig", -- optional, but gives you default configs
     config = function()
+      -- on_attach callback: keymaps per buffer
       local on_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
-
-        -- Keybindings for LSP functionality
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts) -- Go to Definition
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts) -- Go to References
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
       end
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
-      capabilities = capabilities
-      require("lspconfig").lua_ls.setup {
-        -- vim.api.nvim_create_autocmd('LspAttach', {
-        --   callback = function(args)
-        --     local lspclient = vim.lsp.get_client_by_id(args.data.client_id)
-        --     if not lspclient then return end
-        --     if lspclient.supports_method('textDocument/formatting') then
-        --       vim.api.nvim_create_autocmd('BufWritePre', {
-        --         buffer = args.buf,
-        --         callback = function()
-        --           vim.lsp.buf.format({ bufnr = args.buf, id = lspclient.id })
-        --         end
-        --       })
-        --     end
-        --   end,
-        -- }),
-        on_attach = on_attach,
-      }
-      require("lspconfig").ts_ls.setup {
-        -- vim.api.nvim_create_autocmd('LspAttach', {
-        --   callback = function(args)
-        --     local lspclient = vim.lsp.get_client_by_id(args.data.client_id)
-        --     if not lspclient then return end
-        --     if lspclient.supports_method('textDocument/formatting') then
-        --       vim.api.nvim_create_autocmd('BufWritePre', {
-        --         buffer = args.buf,
-        --
-        --         callback = function()
-        --           vim.lsp.buf.format({ bufnr = args.buf, id = lspclient.id })
-        --         end
-        --       })
-        --     end
-        --   end,
-        -- }),
-        on_attach = on_attach,
-        hostInfo = "neovim",
-        filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 
+      -- capabilities (optional, if you use nvim-cmp or blink.cmp)
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+      -- Configure servers
+      vim.lsp.config["lua_ls"] = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            workspace = { checkThirdParty = false },
+            diagnostics = { globals = { "vim" } },
+          },
+        },
       }
-    --   require("lspconfig").eslint.setup({
-    --     settings = {
-    --       packageManager = 'yarn',
-    --       workingDirectory = { mode = 'location' },
-    --       format = true,
-    --       quiet = true,
-    --       validate = false
-    --     },
-    --     filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-    --     on_attach = function(client, bufnr)
-    --       vim.api.nvim_create_autocmd("BufWritePre", {
-    --         buffer = bufnr,
-    --         command = "EslintFixAll",
-    --       })
-    --     end,
-    --   })
-    end
+      vim.lsp.enable("lua_ls")
+
+      vim.lsp.config["ts_ls"] = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {
+          "javascript", "javascriptreact", "javascript.jsx",
+          "typescript", "typescriptreact", "typescript.tsx",
+        },
+      }
+      vim.lsp.enable("ts_ls")
+      -- vim.lsp.config["eslint"] = {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     format = true,
+      --     packageManager = "yarn",
+      --     quiet = false,
+      --     codeAction = {
+      --       disableRuleComment = { enable = true, location = "separateLine" },
+      --       showDocumentation = { enable = true },
+      --     },
+      --     rulesCustomizations = {},
+      --     run = "onSave", -- or "onSave"
+      --     validate = "on",
+      --     workingDirectory = { mode = "auto" },
+      --   },
+      -- }
+      -- vim.lsp.enable("eslint")
+    end,
   }
-}

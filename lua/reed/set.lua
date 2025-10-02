@@ -35,3 +35,4 @@ vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.cmd.colorscheme = "gruber-darker"
 vim.api.nvim_create_user_command('Yankpath', '!echo % | pbcopy', {})
+vim.opt.splitright = true

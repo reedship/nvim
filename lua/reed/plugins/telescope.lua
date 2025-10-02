@@ -40,7 +40,8 @@ return {
         }
       end)
       require "reed.plugins.telescope.multigrep".setup()
-      vim.keymap.set('n', '<leader>b', function() require('telescope.builtin').buffers(ivy) end)
+      vim.keymap.set('n', '<leader>b', function() require('telescope.builtin').buffers { mru = true }
+    end)
       vim.keymap.set('n', '<leader>o', function() require('telescope.builtin').oldfiles(ivy) end)
       local action_state = require('telescope.actions.state')
 
