@@ -31,8 +31,8 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
-vim.cmd.colorscheme = "gruber-darker"
+-- vim.cmd.colorscheme = "gruber-darker"
 vim.api.nvim_create_user_command('Yankpath', '!echo % | pbcopy', {})
 vim.opt.splitright = true

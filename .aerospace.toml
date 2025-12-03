@@ -33,8 +33,8 @@ alt-shift-semicolon = 'move right'
 # Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
 alt-h = 'join-with left'
 alt-v = 'join-with up'
-alt-q = 'close' 
-alt-shift-q = 'close-all-windows-but-current' 
+alt-q = 'close'
+alt-shift-q = 'close-all-windows-but-current'
 alt-shift-r = 'balance-sizes'
 alt-f = 'fullscreen'
 
