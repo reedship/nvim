@@ -45,6 +45,7 @@ return {
     end)
       vim.keymap.set('n', '<leader>o', function() require('telescope.builtin').oldfiles(ivy) end)
       local action_state = require('telescope.actions.state')
+      vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').colorscheme { enable_preview = true } end)
 
       vim.keymap.set('n', '<leader>b', function()
         require('telescope.builtin').buffers({
