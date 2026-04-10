@@ -15,6 +15,8 @@ return {
             trailspace.setup {}
             local icons = require 'mini.icons'
             icons.setup {}
+            local splitjoin = require 'mini.splitjoin'
+            splitjoin.setup {}
             local hipatterns = require('mini.hipatterns')
             hipatterns.setup({
               highlighters = {

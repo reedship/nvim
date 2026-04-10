@@ -87,7 +87,7 @@ return {
         },
       })
 
-      vim.cmd.colorscheme("ef-theme") -- To use the default colorscheme defined above
+      vim.cmd.colorscheme("retrobox") -- To use the default colorscheme defined above
       -- Or choose a specific theme
       -- vim.cmd.colorscheme("ef-dream")
   end

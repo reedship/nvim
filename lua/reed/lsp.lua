@@ -111,15 +111,41 @@ local eslint_config_files = {
   'eslint.config.cts',
 }
 vim.lsp.config('eslint',{
-  cmd = { "vscode-eslint-language-server", "--stdio" },
+  cmd = {
+    "vscode-eslint-language-server",
+    "--stdio"
+  },
 
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "astro", "htmlangular" },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "svelte",
+    "astro",
+    "htmlangular"
+  },
+
   root_dir = function(bufnr, on_dir)
     -- The project root is where the LSP can be started from
     -- As stated in the documentation above, this LSP supports monorepos and simple projects.
     -- We select then from the project root, which is identified by the presence of a package
     -- manager lock file.
-    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+    local root_markers = {
+      'package-lock.json',
+      'yarn.lock',
+      'pnpm-lock.yaml',
+      'bun.lockb',
+      'bun.lock'
+    }
+
+    -- dont run eslint in node_modules at all
+    local filename = vim.api.nvim_buf_get_name(bufnr)
+    if filename:match("node_modules") then
+      return
+    end
+
     -- Give the root markers equal priority by wrapping them in a table
     root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
     or vim.list_extend(root_markers, { '.git' })
@@ -176,11 +202,11 @@ vim.lsp.config('eslint',{
       }
 
       -- Support Yarn2 (PnP) projects
-      local pnp_cjs = root_dir .. '/.pnp.cjs'
-      local pnp_js = root_dir .. '/.pnp.js'
-      if type(config.cmd) == 'table' and (vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js)) then
-        config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd --[[@as table]])
-      end
+      -- local pnp_cjs = root_dir .. '/.pnp.cjs'
+      -- local pnp_js = root_dir .. '/.pnp.js'
+      -- if type(config.cmd) == 'table' and (vim.uv.fs_stat(pnp_cjs) or vim.uv.fs_stat(pnp_js)) then
+      --   config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd --[[@as table]])
+      -- end
     end
   end,
 
@@ -221,7 +247,9 @@ vim.lsp.config('eslint',{
       enable = true,
       mode = "all"
     },
-    experimental = {},
+    experimental = {
+      useFlatConfig = false,
+    },
     format = true,
     nodePath = "",
     onIgnoredFiles = "off",
@@ -234,7 +262,7 @@ vim.lsp.config('eslint',{
     useESLintClass = false,
     validate = "on",
     workingDirectory = {
-      mode = "auto"
+      mode = "location"
     }
   }
 })
