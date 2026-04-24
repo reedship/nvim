@@ -38,3 +38,7 @@ vim.opt.updatetime = 50
 vim.opt.cursorline = true
 vim.api.nvim_create_user_command('Yankpath', '!echo % | pbcopy', {})
 vim.opt.splitright = true
+
+vim.o.background = "dark"
+
+

@@ -7,6 +7,7 @@ vim.lsp.config("ts_ls", {
     vim.keymap.set('n', 'grr', vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr })
     -- vim.keymap.set('n', 'gws', vim.lsp.buf.workspace_symbol, { noremap = true, silent = true, buffer = bufnr })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr })
+    vim.keymap.set('n', '<leader>ca', '<cmd>LspTypescriptSourceAction<cr>', { noremap = true, silent = true, buffer = bufnr })
     client.server_capabilities.semanticTokensProvider = nil
   end,
 
@@ -57,6 +58,11 @@ vim.lsp.config("ts_ls", {
     -- Example: configure implicit project configuration
     implicitProjectConfiguration = {
       checkJs = true,
+      noErrorTruncation = true
+    },
+    inlayHints = {
+      includeInlayParameterNameHints = 'all',
+      includeInlayVariableTypeHints = true,
     },
   },
 })
@@ -266,8 +272,36 @@ vim.lsp.config('eslint',{
     }
   }
 })
+-- Define the server configuration
+vim.lsp.config('gopls', {
+  cmd = { 'gopls' },
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_markers = { 'go.work', 'go.mod', '.git' },
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+  -- Add this to init.lua for auto-formatting and organizing imports
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+      -- Organize imports
+      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+      -- Format
+      vim.lsp.buf.format({ async = false })
+    end,
+  })
+
+})
+
 vim.lsp.enable({
   "ts_ls",
   "lua_ls",
-  "eslint"
+  "eslint",
+  "gopls"
 })
