@@ -27,8 +27,8 @@ return {
       vim.keymap.set("n", "<leader>fd", function() require('telescope.builtin').git_files(ivy) end)
       vim.keymap.set("n", "<leader>fh", function() require('telescope.builtin').help_tags(ivy) end)
       vim.keymap.set("n", "<leader>fr", function() require('telescope.builtin').resume(ivy) end)
-      -- vim.keymap.set("n", "<leader>fwr", function() require('telescope.builtin').lsp_references(ivy) end)
-      -- vim.keymap.set("n", "<leader>fws", function() require('telescope.builtin').lsp_workspace_symbols(ivy) end)
+      vim.keymap.set("n", "<leader>gws", function() require('telescope.builtin').lsp_workspace_symbols() end)
+      vim.keymap.set('n', 'grr', function() require('telescope.builtin').lsp_references() end)
       vim.keymap.set("n", "<leader>fD", function() require('telescope.builtin').find_files(ivy) end)
       vim.keymap.set("n", "<leader>en", function()
         require('telescope.builtin').find_files {

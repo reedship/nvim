@@ -4,7 +4,7 @@ vim.lsp.config("ts_ls", {
   -- `on_attach` is a function called when the language server attaches to a buffer
   on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set('n', 'grr', vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr })
+    -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, { noremap = true, silent = true, buffer = bufnr })
     -- vim.keymap.set('n', 'gws', vim.lsp.buf.workspace_symbol, { noremap = true, silent = true, buffer = bufnr })
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr })
     vim.keymap.set('n', '<leader>ca', '<cmd>LspTypescriptSourceAction<cr>', { noremap = true, silent = true, buffer = bufnr })

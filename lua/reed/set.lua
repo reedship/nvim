@@ -41,4 +41,5 @@ vim.opt.splitright = true
 
 vim.o.background = "dark"
 
-
+vim.o.cmdheight = 1
+vim.o.cmdwinheight = 5
